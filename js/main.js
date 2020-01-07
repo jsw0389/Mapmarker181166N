@@ -50,13 +50,6 @@ function searchAddress() {
 
 		var result = response.v2, // 검색 결과의 컨테이너
 				items = result.addresses; // 검색 결과의 배열
-
-		/*
-		marker.setPosition(tempCoords);
-		marker.setMap(map);
-		map.setCenter(tempCoords);
-		map.setLevel(3);
-		*/
 	});
 }
 
