@@ -16,12 +16,26 @@ var mylocationCircle = 0;
 var mylocationMark = 0;
 var customMarkButtonBackground = 0;
 /**************************** 변수 선언 ****************************/
+var mapOptions = {
+		zoomControl: true,
+		zoomControlOptions: {
+				style: naver.maps.ZoomControlStyle.SMALL,
+				position: naver.maps.Position.TOP_RIGHT
+		},
+		mapTypeControl: true,
+		mapTypeControlOptions: {
+				style: naver.maps.MapTypeControlStyle.BUTTON,
+				position: naver.maps.Position.TOP_RIGHT
+		},
+		scaleControl: true,
+		scaleControlOptions: {
+				position: naver.maps.Position.RIGHT_CENTER
+		},
+		center: new naver.maps.LatLng(37.290212, 127.0094235),
+    zoom: 10
+};
 
-var map = new naver.maps.Map("map", {
-    center: new naver.maps.LatLng(37.3595316, 127.1052133),
-    zoom: 10,
-    mapTypeControl: true
-});
+var map = new naver.maps.Map(document.getElementById('map'), mapOptions);
 
 var infoWindow = new naver.maps.InfoWindow({
     anchorSkew: true
