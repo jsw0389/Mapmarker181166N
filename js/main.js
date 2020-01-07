@@ -43,20 +43,21 @@ function searchAddress() {
 	var temp = document.getElementById("inputAddress").value;
 	var tempCoords = 0;
 	searchjuso = temp;
-	naver.maps.Service.geocode(searchjuso, function(status, response) {
-	        if (status !== naver.maps.Service.Status.OK) {
-	            return alert('Something wrong!');
-	        }
+	naver.maps.Service.geocode({query: searchjuso}, function(status, response) {
+		if (status !== naver.maps.Service.Status.OK) {
+				return alert('Something wrong!');
+		}
 
-	        var result = response.v2, // 검색 결과의 컨테이너
-	            items = result.addresses; // 검색 결과의 배열
-							/*
-							marker.setPosition(tempCoords);
-							marker.setMap(map);
-							map.setCenter(tempCoords);
-							map.setLevel(3);
-							*/
-					});
+		var result = response.v2, // 검색 결과의 컨테이너
+				items = result.addresses; // 검색 결과의 배열
+
+		/*
+		marker.setPosition(tempCoords);
+		marker.setMap(map);
+		map.setCenter(tempCoords);
+		map.setLevel(3);
+		*/
+	});
 }
 
 map.setCursor('pointer');
