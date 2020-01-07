@@ -83,8 +83,8 @@ CustomOverlay.prototype.draw = function() {
 
     var pixelPosition = projection.fromCoordToOffset(position);
 
-    this._element.css('left', pixelPosition.x);
-    this._element.css('top', pixelPosition.y);
+    this._element.css('center', pixelPosition.x);
+    this._element.css('center', pixelPosition.y);
 };
 
 CustomOverlay.prototype.onRemove = function() {
