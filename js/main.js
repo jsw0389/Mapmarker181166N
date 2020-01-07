@@ -33,7 +33,7 @@ var mapOptions = {
 		scaleControlOptions: {
 				position: naver.maps.Position.RIGHT_CENTER
 		},
-		center: new naver.maps.LatLng(37.290212, 127.0094235),
+		center: new naver.maps.LatLng(37.29024486779747, 127.01159326175336),
     zoom: 10
 };
 var map = new naver.maps.Map(document.getElementById('map'), mapOptions);
@@ -106,7 +106,7 @@ CustomOverlay.prototype.getPosition = function() {
 /**
  * 사용자 정의 오버레이 사용하기
  */
-var center = new naver.maps.LatLng(37.290212, 127.0094235);
+var center = new naver.maps.LatLng(37.29024486779747, 127.01159326175336);
 
 // 오버레이 생성
 var overlay = new CustomOverlay({
