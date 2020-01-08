@@ -64,7 +64,7 @@ function searchAddress() {
 		map.setCenter(tempCoords);
 		map.setLevel(3);
 		*/
-	});
+
 }
 
 map.setCursor('pointer');
