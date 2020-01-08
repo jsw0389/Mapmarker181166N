@@ -58,7 +58,6 @@ var CustomOverlay = function(options) {
     //this._element = $('<div style="position:absolute;font-family:Arial;font-size:10px;font-weight:bold;padding:3px 3px;left:0;top:0;text-align:center;background-color:#fff;border:2px solid #f00;">커스텀오버레이</div>')
 		this._element = $('<div class="customMarkButton"> tempTest </div>')
 
-		this._element = $('tempContent')
     this.setPosition(options.position);
     this.setMap(options.map || null);
 };
