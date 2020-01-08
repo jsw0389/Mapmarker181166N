@@ -54,9 +54,11 @@ function searchAddress() {
 }
 
 var CustomOverlay = function(options) {
-	var TempTest = 'Test';
+	var tempTest = 'Test';
+	var tempContent;
     //this._element = $('<div style="position:absolute;font-family:Arial;font-size:10px;font-weight:bold;padding:3px 3px;left:0;top:0;text-align:center;background-color:#fff;border:2px solid #f00;">커스텀오버레이</div>')
-		this._element = $('<button type="button" class = "customMarkButton" id="tempId" >' + TempTest + '</button>')
+		tempContent = '<button type="button" class = "customMarkButton" id="tempId" >' + tempTest + '</button>';
+		this._element = $('tempContent')
     this.setPosition(options.position);
     this.setMap(options.map || null);
 };
