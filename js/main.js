@@ -33,7 +33,7 @@ var mapOptions = {
 		scaleControlOptions: {
 				position: naver.maps.Position.RIGHT_CENTER
 		},
-		center: new naver.maps.LatLng(37.29024486779747, 127.01159326175336),
+		center: new naver.maps.LatLng(37.290212, 127.0094235),
     zoom: 10
 };
 var map = new naver.maps.Map(document.getElementById('map'), mapOptions);
@@ -54,48 +54,16 @@ function searchAddress() {
 }
 
 var CustomOverlay = function(options) {
-		var tempBrown = 'Brown';
-		this._element = $('<div class="customMarkButton">' +
-												tempBrown +
-												'</div>')
+    this._element = $('<div style="position:absolute;left:0;top:0;width:124px;background-color:#F2F0EA;text-align:center;border:2px solid #6C483B;">' +
+                        '<span style="font-weight: bold;"> Brown </span>' +
+                        '</div>')
 
     this.setPosition(options.position);
     this.setMap(options.map || null);
 };
 
-// CustomOverlay는 OverlayView를 상속받습니다.
 CustomOverlay.prototype = new naver.maps.OverlayView();
-
 CustomOverlay.prototype.constructor = CustomOverlay;
-
-CustomOverlay.prototype.onAdd = function() {
-    var overlayLayer = this.getPanes().overlayLayer;
-
-    this._element.appendTo(overlayLayer);
-};
-
-CustomOverlay.prototype.draw = function() {
-    // 지도 객체가 설정되지 않았으면 draw 기능을 하지 않습니다.
-    if (!this.getMap()) {
-        return;
-    }
-
-    // projection 객체를 통해 LatLng 좌표를 화면 좌표로 변경합니다.
-    var projection = this.getProjection(),
-        position = this.getPosition();
-
-    var pixelPosition = projection.fromCoordToOffset(position);
-
-    this._element.css('left', pixelPosition.x);
-    this._element.css('top', pixelPosition.y);
-};
-
-CustomOverlay.prototype.onRemove = function() {
-    this._element.remove();
-
-    // 이벤트 핸들러를 설정했다면 정리합니다.
-    this._element.off();
-};
 
 CustomOverlay.prototype.setPosition = function(position) {
     this._position = position;
@@ -106,18 +74,48 @@ CustomOverlay.prototype.getPosition = function() {
     return this._position;
 };
 
-/**
- * 사용자 정의 오버레이 사용하기
- */
-var center = new naver.maps.LatLng(37.29024486779747, 127.01159326175336);
+CustomOverlay.prototype.onAdd = function() {
+    var overlayLayer = this.getPanes().overlayLayer;
 
-// 오버레이 생성
+    this._element.appendTo(overlayLayer);
+};
+
+CustomOverlay.prototype.draw = function() {
+    if (!this.getMap()) {
+        return;
+    }
+
+    var projection = this.getProjection(),
+        position = this.getPosition(),
+        pixelPosition = projection.fromCoordToOffset(position);
+
+    this._element.css('left', pixelPosition.x);
+    this._element.css('top', pixelPosition.y);
+};
+
+CustomOverlay.prototype.onRemove = function() {
+    var overlayLayer = this.getPanes().overlayLayer;
+
+    this._element.remove();
+    this._element.off();
+};
+
+var position = new naver.maps.LatLng(37.3849483, 127.1229117);
+var map = new naver.maps.Map("map", {
+    center: position,
+    zoom: 14
+});
 var overlay = new CustomOverlay({
-    position: center,
-    map: map
+    map: map,
+    position: position
 });
 
-// 오버레이 삭제
-// overlay.setMap(null);
+naver.maps.Event.addListener(map, 'click', function(e) { //클릭한 위치에 오버레이를 추가합니다.
+    var overlay = new CustomOverlay({
+        position: e.coord
+    });
+
+    overlay.setMap(map);
+});
 
 map.setCursor('pointer');
