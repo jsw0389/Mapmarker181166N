@@ -54,7 +54,10 @@ function searchAddress() {
 }
 
 var CustomOverlay = function(options) {
-    this._element = $('<div style="position:absolute;left:0;top:0;width:120px;height:30px;line-height:30px;text-align:center;background-color:#fff;border:2px solid #f00;">커스텀오버레이</div>')
+		var tempBrown = 'Brown';
+		this._element = $('<div class="customMarkButton">' +
+												tempBrown +
+												'</div>')
 
     this.setPosition(options.position);
     this.setMap(options.map || null);
