@@ -58,12 +58,12 @@ function searchAddress() {
 				});
 		});
 
-		/*
+
 		marker.setPosition(tempCoords);
 		marker.setMap(map);
 		map.setCenter(tempCoords);
 		map.setLevel(3);
-		*/
+
 
 }
 
