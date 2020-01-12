@@ -8,8 +8,7 @@ var bColumn = [];
 var cColumn = [];
 var jusoNotFound = [];
 var coords = [];
-//var geocoder = new daum.maps.services.Geocoder();
-//var bounds = new daum.maps.LatLngBounds();
+var bounds;
 var chkBackground = 0;
 var fileClassBoolean = 0;
 var mylocationCircle = 0;
@@ -56,18 +55,116 @@ function searchAddress() {
 
     var tempX = items.x, tempY = items.y;
     var position = new naver.maps.LatLng(tempY, tempX);
-
     customOverlaydraw(map, position,temp);
-
+		map.setCenter(position);
 		});
 }
+
+
+//엑셀 로드 함수
+function fixdata(data) {
+	var o = "",
+		l = 0,
+		w = 10240;
+	for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
+	o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+	return o;
+}
+
+function getConvertDataToBin($data) {
+	var arraybuffer = $data;
+	var data = new Uint8Array(arraybuffer);
+	var arr = new Array();
+	for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+	var bstr = arr.join("");
+
+	return bstr;
+}
+
+function handleFile(e) {
+	document.getElementById('endHidden').style.display = 'none';
+	var files = e.target.files;
+	var i, f;
+	for (i = 0; i != files.length; ++i) {
+		f = files[i];
+		var reader = new FileReader();
+		var name = f.name;
+		reader.onload = function(e) {
+			var data = e.target.result;
+			var workbook;
+			if (rABS) {
+				/* if binary string, read with type 'binary' */
+				workbook = XLSX.read(data, {
+					type: 'binary'
+				});
+			} else {
+				/* if array buffer, convert to base64 */
+				var arr = fixdata(data);
+				workbook = XLSX.read(btoa(arr), {
+					type: 'base64'
+				});
+			} //end. if
+
+			/* 워크북 처리 */
+			workbook.SheetNames.forEach(function(item, index, array) {
+				// CSV
+				var csv = XLSX.utils.sheet_to_csv(workbook.Sheets[item]); // default : ","
+				// json
+				var json = XLSX.utils.sheet_to_json(workbook.Sheets[item]);
+				var worksheet = workbook.Sheets[item];
+				var range = XLSX.utils.decode_range(worksheet['!ref']);
+				for (var j = 1; range.e.r+2 >= j; j++) {
+					aColumn[j] = (worksheet["A" + j] ? worksheet["A" + j].v : undefined);
+					bColumn[j] = (worksheet["B" + j] ? worksheet["B" + j].v : undefined);
+					cColumn[j] = (worksheet["C" + j] ? worksheet["C" + j].v : undefined);
+				}
+
+				if (fileClassBoolean == 0){
+					var notFoundCount = 0;
+					aColumn.forEach(function(addr, index) {
+						naver.maps.Service.geocode({query: addr}, function(status, response) {
+							if (status !== naver.maps.Service.Status.OK) {
+									return alert("주소 검색 실패");
+							}
+							var result = response.v2; // 검색 결과의 컨테이너
+									items = result.addresses[0]; // 검색 결과의 배열
+							coords[index] = items;
+							if (coords[index] !== undefined) {
+								if (bColumn[index] == undefined) {bColumn[index] = "V";}
+								var tempContent = bColumn[index];
+								var tempX = coords[index].x, tempY = coords[index].y;
+    						var position = new naver.maps.LatLng(tempY, tempX);
+								customOverlaydraw(map, position, tempContent);
+							}
+						});
+					}); //end. forEach
+				}
+			});
+		}; //end onload
+		if (rABS) reader.readAsBinaryString(f);
+		else reader.readAsArrayBuffer(f);
+    var tempDiv = document.getElementById('noneBackgroundMenu');
+    tempDiv.style.display = 'block';
+	} //end. for
+}
+
+
+
+
+
+
+
+
+
+
+
 
 //커스텀오버레이 함수
 function customOverlaydraw(map,position,content) {
   var CustomOverlay = function(options) {
-    var tempBrown = content;
+    var tempContent = content;
       this._element = $('<div class="customMarkButton">' +
-                          tempBrown +
+                          tempContent +
                           '</div>')
       this.setPosition(options.position);
       this.setMap(options.map || null);
