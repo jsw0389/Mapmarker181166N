@@ -271,6 +271,10 @@ function goDetail() {
 	popupOpen(); //레이어 팝업창 오픈
 	wrapWindowByMask(); //화면 마스크 효과
 }
+
+function fileClass(e) {
+	fileClassBoolean = e;
+}
 /****************************** 함수 ******************************/
 
 naver.maps.Event.addListener(map, 'click', function(e) { //클릭한 위치에 오버레이를 추가합니다.
