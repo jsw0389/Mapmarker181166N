@@ -137,7 +137,6 @@ function wrapWindowByMask() {
 	//$('#mask').fadeIn(1000);
 	$('#mask').fadeTo("slow", 0.5);
 }
-
 function popupOpen() {
 	$('.layerpop').css("position", "absolute");
 	//영역 가운에데 레이어를 뛰우기 위해 위치 계산
@@ -146,12 +145,10 @@ function popupOpen() {
 	//$('.layerpop').draggable();
 	$('#layerbox').show();
 }
-
 function popupClose() {
 	$('#layerbox').hide();
 	$('#mask').hide();
 }
-
 function goDetail() {
 	popupOpen(); //레이어 팝업창 오픈
 	wrapWindowByMask(); //화면 마스크 효과
