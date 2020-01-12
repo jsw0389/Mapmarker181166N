@@ -125,26 +125,7 @@
     cursor: pointer;
     border-radius: 0 5px 5px 0;
   }
-
-
-
-  .map_wrap {position:relative;overflow:auto;width:100%;height:100%;}
-  .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
   .customMarkButton {
-    /*
-    background-color:#ffffff;
-    border-radius:6px;
-    border:1px solid black;
-    display:inline-block;
-    cursor:pointer;
-    color:black;
-    font-family:Arial;
-    font-size:10px;
-    font-weight: bold;
-    padding:3px 3px;
-    text-decoration:none;
-    text-align: center;
-    */
     position:absolute;
     left:0;
     top:0;
@@ -161,7 +142,25 @@
     text-decoration:none;
     text-align: center;
   }
+  .map_wrap {position:relative;overflow:auto;width:100%;height:100%;}
+  .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+
   /*
+  .customMarkButton {
+
+    background-color:#ffffff;
+    border-radius:6px;
+    border:1px solid black;
+    display:inline-block;
+    cursor:pointer;
+    color:black;
+    font-family:Arial;
+    font-size:10px;
+    font-weight: bold;
+    padding:3px 3px;
+    text-decoration:none;
+    text-align: center;
+  }
   .customMarkButton:hover {
     background-color:#f6f6f6;
   }
@@ -170,7 +169,6 @@
     top:1px;
   }
   */
-
 
   .subMenu label{
     display: inline-block;
