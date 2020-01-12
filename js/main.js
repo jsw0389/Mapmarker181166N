@@ -17,27 +17,9 @@ var mylocationMark = 0;
 var customMarkButtonBackground = 0;
 /**************************** 변수 선언 ****************************/
 
-// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-var mapOptions = {
-		zoomControl: true,
-		zoomControlOptions: {
-				style: naver.maps.ZoomControlStyle.SMALL,
-				position: naver.maps.Position.TOP_RIGHT
-		},
-		mapTypeControl: true,
-		mapTypeControlOptions: {
-				style: naver.maps.MapTypeControlStyle.BUTTON,
-				position: naver.maps.Position.TOP_RIGHT
-		},
-		scaleControl: true,
-		scaleControlOptions: {
-				position: naver.maps.Position.RIGHT_CENTER
-		},
-		center: new naver.maps.LatLng(37.290212, 127.0094235),
-    zoom: 10
-};
-var map = new naver.maps.Map(document.getElementById('map'), mapOptions);
 
+
+/****************************** 함수 ******************************/
 //주소 검색 함수
 function searchAddress() {
 	var temp = document.getElementById("inputAddress").value;
@@ -174,6 +156,30 @@ function goDetail() {
 	popupOpen(); //레이어 팝업창 오픈
 	wrapWindowByMask(); //화면 마스크 효과
 }
+/****************************** 함수 ******************************/
+
+
+
+// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+var mapOptions = {
+		zoomControl: true,
+		zoomControlOptions: {
+				style: naver.maps.ZoomControlStyle.SMALL,
+				position: naver.maps.Position.TOP_RIGHT
+		},
+		mapTypeControl: true,
+		mapTypeControlOptions: {
+				style: naver.maps.MapTypeControlStyle.BUTTON,
+				position: naver.maps.Position.TOP_RIGHT
+		},
+		scaleControl: true,
+		scaleControlOptions: {
+				position: naver.maps.Position.RIGHT_CENTER
+		},
+		center: new naver.maps.LatLng(37.290212, 127.0094235),
+    zoom: 10
+};
+var map = new naver.maps.Map(document.getElementById('map'), mapOptions);
 
 naver.maps.Event.addListener(map, 'click', function(e) { //클릭한 위치에 오버레이를 추가합니다.
     customOverlaydraw(map,e.coord);
