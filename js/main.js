@@ -103,6 +103,78 @@ function customOverlaydraw(map,position,content) {
   });
 }
 
+//설명서 표시하는 함수
+function alertHelp() {
+	var alertHelpString =     "-----Address Excel-----"+"<br>"
+											+			"A열 : 검색 주소 값"+"<br>"
+											+			"B열 : 표시 값"+"<br>"
+											+			"C열 : Category2"+"<br>"
+											+			"ex) : A열 : 영화동 338-1, B열 : 338-1, C열 : 일반주택"+"<br>"
+											+			"<br>"
+											+			"-----GPS Excel-----"+"<br>"
+											+			"A열 : No."+"<br>"
+											+			"B열 : 위도"+"<br>"
+											+			"C열 : 경도"+"<br>"
+											+			"ex) : A열 : 0, B열 : 37.290208, C열 : 127.011734"+"<br>"
+											+			"<br>"
+											+			"-----추가 기능-----"+"<br>"
+											+			"지도 클릭시 번지,위도,경도 자동 복사"+"<br>"
+											+			"내 위치 및 오차 반경 표시"+"<br>"
+											+			"<br>"
+											+			"-----Category Color-----"+"<br>"
+											+			"Green : 일반주택, 상가주택"+"<br>"
+											+			"Gold : 농사용"+"<br>"
+											+			"Puple : 휴게음식점, 일반음식점"+"<br>"
+											+			"Red : 노래연습장업, 기타주점, 유흥주점, 단란주점"+"<br>"
+											+			"Blue : 이동통신 중계기"+"<br>"
+											+			"Brown : 광업, 하수폐기청소업, 제조업"+"<br>"
+											+			"Black : Default"+"<br>";
+	document.getElementById("alertTitle").innerHTML = "사용 설명서";
+	document.getElementById("alertContent").innerHTML = alertHelpString;
+	goDetail()
+}
+
+//레이어 팝업 기능
+function wrapWindowByMask() {
+	//화면의 높이와 너비를 구한다.
+	var maskHeight = $(document).height();
+	var maskWidth = $(window).width();
+
+	//문서영역의 크기
+	console.log("document 사이즈:" + $(document).width() + "*" + $(document).height());
+	//브라우저에서 문서가 보여지는 영역의 크기
+	console.log("window 사이즈:" + $(window).width() + "*" + $(window).height());
+
+	//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+	$('#mask').css({
+		'width': maskWidth,
+		'height': maskHeight
+	});
+
+	//애니메이션 효과
+	//$('#mask').fadeIn(1000);
+	$('#mask').fadeTo("slow", 0.5);
+}
+
+function popupOpen() {
+	$('.layerpop').css("position", "absolute");
+	//영역 가운에데 레이어를 뛰우기 위해 위치 계산
+	$('.layerpop').css("top", (($(window).height() - $('.layerpop').outerHeight()) / 2) + $(window).scrollTop());
+	$('.layerpop').css("left", (($(window).width() - $('.layerpop').outerWidth()) / 2) + $(window).scrollLeft());
+	//$('.layerpop').draggable();
+	$('#layerbox').show();
+}
+
+function popupClose() {
+	$('#layerbox').hide();
+	$('#mask').hide();
+}
+
+function goDetail() {
+	popupOpen(); //레이어 팝업창 오픈
+	wrapWindowByMask(); //화면 마스크 효과
+}
+
 naver.maps.Event.addListener(map, 'click', function(e) { //클릭한 위치에 오버레이를 추가합니다.
     customOverlaydraw(map,e.coord);
 });
