@@ -38,6 +38,7 @@ var mapOptions = {
 };
 var map = new naver.maps.Map(document.getElementById('map'), mapOptions);
 
+//주소 검색 함수
 function searchAddress() {
 	var temp = document.getElementById("inputAddress").value;
 	var tempCoords = 0;
@@ -105,14 +106,5 @@ function customOverlaydraw(map,position,content) {
 naver.maps.Event.addListener(map, 'click', function(e) { //클릭한 위치에 오버레이를 추가합니다.
     customOverlaydraw(map,e.coord);
 });
-
-
-
-
-
-
-
-
-}
 
 map.setCursor('pointer');
