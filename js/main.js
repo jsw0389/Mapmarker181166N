@@ -45,7 +45,7 @@ function searchAddress() {
 	searchjuso = temp;
 	naver.maps.Service.geocode({query: searchjuso}, function(status, response) {
 		if (status !== naver.maps.Service.Status.OK) {
-				return alert('Something wrong!');
+				return alert("주소 검색 실패");
 		}
 
 		var result = response.v2; // 검색 결과의 컨테이너
