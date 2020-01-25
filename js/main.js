@@ -155,17 +155,6 @@ function handleFile(e) {
 	} //end. for
 }
 
-
-
-
-
-
-
-
-
-
-
-
 //커스텀오버레이 함수
 function customOverlaydraw(map,position,content) {
   var CustomOverlay = function(options) {
