@@ -282,6 +282,14 @@ function goDetail() {
 function fileClass(e) {
 	fileClassBoolean = e;
 }
+
+//검색 실패 항목 표시하는 함수
+function alertNotFound() {
+	var alertNotFoundString = jusoNotFound.join("<br>");
+	document.getElementById("alertTitle").innerHTML = "검색 실패 항목";
+	document.getElementById("alertContent").innerHTML = alertNotFoundString;
+	goDetail()
+}
 /****************************** 함수 ******************************/
 
 var input_dom_element;
