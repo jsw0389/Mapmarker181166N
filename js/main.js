@@ -133,17 +133,15 @@ function handleFile(e) {
 								if (bColumn[index] == undefined) {bColumn[index] = "V";}
 								var tempContent = bColumn[index];
 								var tempX = coords[index].x, tempY = coords[index].y;
-								if (tempX == undefined || tempY == undefined) {
-									if (aColumn[index]){
-										jusoNotFound[notFoundCount++] = aColumn[index];
-									}
-								var tempDiv = document.getElementById('chkNotFound');
-								tempDiv.style.display = 'block';
-								} else {
 								var position = new naver.maps.LatLng(tempY, tempX);
 								customOverlaydraw(map, position, tempContent);
 								map.setCenter(position);
+							} else {
+								if (aColumn[index]){
+									jusoNotFound[notFoundCount++] = aColumn[index];
 								}
+							var tempDiv = document.getElementById('chkNotFound');
+							tempDiv.style.display = 'block';
 							}
 						});
 					}); //end. forEach
