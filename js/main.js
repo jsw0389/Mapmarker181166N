@@ -142,6 +142,7 @@ function handleFile(e) {
 								} else {
 								var position = new naver.maps.LatLng(tempY, tempX);
 								customOverlaydraw(map, position, tempContent);
+								map.setCenter(position);
 								}
 							}
 						});
