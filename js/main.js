@@ -290,5 +290,5 @@ $(function() {
 });
 
 naver.maps.Event.addListener(map, 'click', function(e) { //클릭한 위치에 오버레이를 추가합니다.
-    customOverlaydraw(map,e.coord);
+    //customOverlaydraw(map,e.coord);
 });
