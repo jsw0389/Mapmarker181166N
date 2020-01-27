@@ -32,7 +32,8 @@ var mapOptions = {
 				position: naver.maps.Position.BOTTOM_LEFT
 		},
 		center: new naver.maps.LatLng(37.290212, 127.0094235),
-    zoom: 10
+		useStyleMap: true,
+    zoom: 16
 };
 var map = new naver.maps.Map(document.getElementById('map'), mapOptions);
 /**************************** 변수 선언 ****************************/
